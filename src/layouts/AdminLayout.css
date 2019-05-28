@@ -1,0 +1,31 @@
+.wrapper {
+  min-height: 100%;
+  min-width: 1366px;
+  overflow: auto;
+}
+
+.header {
+  background: #fff;
+  padding: 0;
+}
+
+.header_container {
+  height: 64px;
+  padding: 0 12px 0 0;
+  background: #fff;
+  -webkit-box-shadow: 0 1px 4px rgba(0,21,41,.08);
+  box-shadow: 0 1px 4px rgba(0,21,41,.08);
+  position: relative;
+}
+
+.trigger {
+  font-size: 18px;
+  line-height: 64px;
+  padding: 0 24px;
+  cursor: pointer;
+  transition: color .3s;
+}
+
+.trigger:hover {
+  color: #1890ff;
+}

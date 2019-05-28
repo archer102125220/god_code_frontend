@@ -1,0 +1,9 @@
+:local(.user):global(.ant-dropdown-trigger) :global(.ant-avatar) > :global(i.anticon) {
+  font-size: 28px;
+}
+
+.user {
+  height: 100%;
+  display: inline-block;
+}
+

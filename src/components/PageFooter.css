@@ -1,0 +1,15 @@
+.footer {
+    background: #fff;
+    padding: 16px 32px 0 32px;
+    border-bottom: 1px solid #e8e8e8;
+}
+
+.action {
+    min-width: 266px;
+    text-align: right;
+    margin-bottom: 16px;
+}
+
+.action :global(.ant-btn:not(:last-child)) {
+  margin-right: 8px;
+}

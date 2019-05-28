@@ -1,0 +1,15 @@
+.inputfilter_dropdown {
+  padding: 8px;
+  border-radius: 6px;
+  background: #fff;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, .2);
+}
+
+.inputfilter_dropdown input {
+  width: 150px;
+  margin-right: 8px;
+}
+
+.inputfilter_dropdown button {
+  margin-right: 8px;
+}

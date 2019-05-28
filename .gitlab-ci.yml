@@ -1,0 +1,28 @@
+stages:
+  - deploy
+
+cache:
+  paths:
+    - node_modules/
+
+deploy:etown:
+  stage: deploy
+  only:
+    - master
+  tags:
+    - shell
+    - etown
+    - tcbsms
+  before_script:
+    - node --version
+    - yarn --version
+    - rsync --version
+  script:
+    - chmod -R 777 .
+    - /bin/cp -f ./.gitlab/ci/.env/deploy_etown.env ./.env
+    - yarn install
+    - yarn build
+    - rsync -av ./dist/* /var/www/web
+  cache:
+    paths:
+      - node_modules/

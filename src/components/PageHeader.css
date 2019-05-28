@@ -1,0 +1,3 @@
+:global(.antd-pro-page-header-tabs) > :global(.ant-tabs-bar){
+  margin-bottom: 0;
+}
