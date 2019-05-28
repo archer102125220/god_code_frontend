@@ -20,6 +20,22 @@ export default [
         title: '角色權限',
       },
     ],
+  },
+  {
+    icon: 'picture',
+    title: '活動管理',
+    menu: [
+      {
+        link: '/eventAlbum',
+        icon: itemIcon,
+        title: '活動集錦',
+      },
+      {
+        link: '/eventType',
+        icon: itemIcon,
+        title: '活動類型',
+      },
+    ],
   },  
   {
     icon: 'setting',

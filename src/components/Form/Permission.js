@@ -49,7 +49,7 @@ class Permission extends React.Component {
   permissionMap = {
     user: '用戶',
     role: '角色權限',
-    file:'檔案管理',
+    eventtype:'活動類型管理',
     config: '系統配置',
     log: '日誌',
   };
