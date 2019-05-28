@@ -70,8 +70,6 @@ export function generateActionCol(_config) {
       width+=53;
     }
   });
-  console.log(_config);
-  console.log(width);
   return {
     key: 'action',
     title: '動作',

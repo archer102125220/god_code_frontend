@@ -68,6 +68,9 @@ class UserIndex extends React.Component {
       }),
       render: (text, record, defaultRender) => {
         const { authUser } = this.props;
+        if (_.get(record, 'id') !== _.get(authUser, 'id')){
+          if(_.get(authUser, 'id')=='1') return defaultRender();
+        }
         return defaultRender({
           showEdit: false,
           showDelete: false,

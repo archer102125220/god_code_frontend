@@ -51,7 +51,6 @@ class BasicFileUploader extends React.Component {
 
   handleBeforeUpload = (file, fileList) => {
     const { onChange } = this.props;
-    console.log(fileList);
     if(fileList.length >= 1) {
       this.setState({
         list: [],
