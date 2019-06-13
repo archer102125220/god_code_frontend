@@ -18,13 +18,27 @@ const Table = {
   Sorter: sorter,
 };
 
+// 產生業者名稱顯示
+export function generateVendorNameCol(_config = {}) {
+  const baseConfig = {
+    key: 'vendor_name',
+    title: '所屬業者',
+    render: (text, record) => {
+      const vendor = _.get(record, 'vendor');
+      if (_.isNull(vendor)) return '系統管理員';
+      return _.get(vendor, 'name', '-');
+    }
+  };
+  return _.extend(baseConfig, _config);
+}
+
 // 產生啟用停用狀態顯示
-export function generateEnabledStatusCol() {
+export function generateEnabledStatusCol(defaultFilterValue) {
   return {
     key: 'deleted_at',
     title: '狀態',
     dataIndex: 'deleted_at',
-    width:'85px',
+    width: '85px',
     ...Table.Filter.generateListFilter([
       { text: '啟用', value: 'null' },
       { text: '停用', value: 'notnull' },
@@ -38,7 +52,7 @@ export function generateEnabledStatusCol() {
         default:
           return true;
       }
-    }, 'deleted_at')),
+    }, 'deleted_at'), true, defaultFilterValue),
     render: (text, record) => {
       if (!_.has(record, 'deleted_at')) return null;
       if (_.isNull(text)) {
@@ -64,18 +78,18 @@ export function generateEnabledStatusCol() {
  */
 export function generateActionCol(_config) {
   const showName = ['showDetail', 'showEdit', 'showDelete', 'showStatus'];
-  let width=0;
+  let width = 0;
   _.map(showName, (name) => {
-    if(_.get(_config, name, false)){
-      width+=53;
+    if (_.get(_config, name, false)) {
+      width += 60;
     }
   });
   return {
     key: 'action',
     title: '動作',
     width,
-    render: (text, record) => {      
-      if(width===0) {
+    render: (text, record) => {
+      if (width === 0) {
         return "無";
       }
       const defaultRender = (extendsProps = {}) => {

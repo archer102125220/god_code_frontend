@@ -4,7 +4,7 @@
  * layout: AdminLayout
  * authorized:
  *   name: hasPermission
- *   params: eventType.index
+ *   params: eventAlbum.index
  */
 
 import _ from 'lodash';
@@ -12,29 +12,30 @@ import React from 'react';
 
 import { connect } from 'dva';
 import router from 'umi/router';
-
+import withRouter from 'umi/withRouter';
 
 import { Button, Card, Spin } from 'antd';
+import { DescriptionList } from 'ant-design-pro';
 
 import PageLoading from '@/components/PageLoading';
 import PageHeader from '@/components/PageHeader';
-import EventTypeForm from '@/components/Form/EventType';
+import EventAlbumForm from '@/components/Form/EventAlbum';
 
+@withRouter
 @connect(state => ({
-  eventType: _.get(state, 'eventTypes.detail', {}),
-  loading: _.get(state, 'loading.effects.eventTypes/GET_eventType', false),
+  eventAlbum: _.get(state, 'eventAlbums.detail', null),
+  loading: _.get(state, 'loading.effects.eventAlbums/GET_eventAlbum', false),
 }))
-
-class EventTypeDetail extends React.Component {
-  getEventTypeId = () => {
+class EventAlbumDetail extends React.Component {
+  getEventAlbumId = () => {
     const { match } = this.props;
     return _.toInteger(_.get(match, 'params.id', -1));
   }
 
-  getEventType = () => {
-    const id = this.getEventTypeId();
+  getEventAlbum = () => {
+    const id = this.getEventAlbumId();
     this.props.dispatch({
-      type: 'eventTypes/GET_eventType',
+      type: 'eventAlbums/GET_eventAlbum',
       payload: {
         id,
       },
@@ -42,22 +43,22 @@ class EventTypeDetail extends React.Component {
   }
 
   componentDidMount() {
-    this.getEventType();
+    this.getEventAlbum();
   }
 
   render() {
-    const { eventType, loading } = this.props;
+    const { eventAlbum, loading } = this.props;
     const action = (
       <div>
-        <Button icon="close" onClick={() => router.push('/eventType')}>返回</Button>
+        <Button icon="close" onClick={() => router.go(-1)}>返回</Button>
       </div>
     );
     return (
-      <PageLoading isLoading={_.isNull(eventType)}>
+      <PageLoading isLoading={_.isNull(eventAlbum)}>
         <PageHeader action={action} />
         <Spin tip="載入中" spinning={loading}>
           <Card style={{ margin: 20 }}>
-            <EventTypeForm isReadonly={true} defaultValue={eventType} />
+            <EventAlbumForm isReadonly={true} defaultValue={eventAlbum} />
           </Card>
         </Spin>
       </PageLoading>
@@ -65,4 +66,4 @@ class EventTypeDetail extends React.Component {
   }
 }
 
-export default EventTypeDetail;
+export default EventAlbumDetail;
