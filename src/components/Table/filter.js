@@ -28,27 +28,34 @@ export function wrapRecord(filterFunc, key, defaultValue) {
   return (value, record) => filterFunc(value, _.get(record, key, defaultValue));
 }
 
+// 根據提供的預設值進行封裝
+function wrapDefaultFilterValue(filter, defaultFilterValue) {
+  return _.isUndefined(defaultFilterValue) ? filter : {
+    ...filter,
+    filteredValue: _.isArray(defaultFilterValue) ? defaultFilterValue : [defaultFilterValue],
+  }
+}
 
 /**
  * 產生表格的過濾器建構器設定
  */
 
-export function generateListFilter(items, filterFunc, filterMultiple = true) {
-  return {
+export function generateListFilter(items, filterFunc, filterMultiple = true, defaultFilterValue) {
+  return wrapDefaultFilterValue({
     filters: items,
     filterMultiple,
     onFilter: filterFunc,
-  }
+  }, defaultFilterValue);
 }
 
-export function generateInputFilter(filterFunc) {
-  return {
+export function generateInputFilter(filterFunc, defaultFilterValue) {
+  return wrapDefaultFilterValue({
     filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => {
       return (
         <div className={styles.inputfilter_dropdown}>
           <Input
-            value={selectedKeys[0]}
-            onChange={e => setSelectedKeys(e.target.value ? [e.target.value] : [])}
+            value={!_.isEmpty(selectedKeys) ? selectedKeys[0] : null}
+            onChange={e => setSelectedKeys(e.target.value ? [e.target.value] : undefined)}
             onPressEnter={confirm}
           />
           <Button type="primary" onClick={confirm}>篩選</Button>
@@ -57,7 +64,7 @@ export function generateInputFilter(filterFunc) {
       );
     },
     onFilter: filterFunc,
-  }
+  }, defaultFilterValue);
 }
 
 // 交由伺服器進行過濾

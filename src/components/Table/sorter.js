@@ -4,6 +4,11 @@
 
 import _ from 'lodash';
 
+// 由伺服器排序
+export function byRemote() {
+  return true;
+}
+
 // 文字排序
 export function byText(a, b) {
   return a.localeCompare(b, "zh-Hant");
@@ -36,7 +41,13 @@ export function multiLevel(...funcs) {
 }
 
 // 交由伺服器排序
-export function remoteSorter() {
-  return true;
+export function remoteSorter(sorter, defaultValue) {
+  if (_.isUndefined(sorter)) return true; // 相容過去版本
+  const sortOrder = _.isUndefined(defaultValue) ? false : defaultValue;
+  return {
+    sorter,
+    sortOrder,
+    defaultSortOrder: sortOrder,
+  }
 }
 

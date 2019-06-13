@@ -7,11 +7,15 @@ export default {
   state: {
     list: {},
     listQuery: {},
-    detail: {},
+    detail: null,
   },
   reducers: {
     RESET_all(state) {
-      return {};
+      return {
+        list: {},
+        listQuery: {},
+        detail: null,
+      };
     },
     SET_eventTypes(state, { payload }) {
       return {
@@ -124,5 +128,14 @@ export default {
     },
   },
   subscriptions: {
+    setup({ dispatch, history }) {
+      history.listen(({ pathname }) => {
+        if (!_.startsWith(pathname, '/eventType')) {
+          dispatch({
+            type: 'eventTypes/RESET_all',
+          });
+        }
+      });
+    },
   },
 };

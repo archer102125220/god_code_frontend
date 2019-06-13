@@ -4,7 +4,7 @@
  * layout: AdminLayout
  * authorized:
  *   name: hasPermission
- *   params: eventtype.index
+ *   params: eventType.index
  */
 
 import _ from 'lodash';
