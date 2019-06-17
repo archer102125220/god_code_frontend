@@ -56,6 +56,10 @@ export default {
     },
     * GET_eventAlbum({ payload }, { put, call, select }) {
       try {
+        yield put({
+          type: 'eventAlbums/SET_detail',
+          payload: null,
+        });
         const { id } = payload;
         const token = yield select(state => state.auth.token);
         const data = yield call(eventAlbum.GET_eventAlbum, id, token);

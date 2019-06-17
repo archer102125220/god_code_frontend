@@ -50,6 +50,7 @@ class Permission extends React.Component {
     user: '用戶',
     role: '角色權限',
     eventType:'活動類型管理',
+    eventAlbum:'活動類型管理',
     config: '系統配置',
     log: '日誌',
   };
